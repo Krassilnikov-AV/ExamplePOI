@@ -1,24 +1,11 @@
 package poi.excel;
 
-import static com.sun.xml.bind.util.CalendarConv.formatter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.text.ParseException;
-import java.text.ParsePosition;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Locale;
-import javax.ejb.Local;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.DateUtil;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.*;
+
+import java.io.*;
+import java.text.*;
+import java.util.*;
 
 /**
  * Класс считывающий данные столбца файла Excel в коллекцию List
@@ -57,7 +44,7 @@ public class ReadingExcelData {
 
  //   String fileName = "PrimerRaspisania.xlsx";
     String fileName = "fileToRead";
-    LinkedList<String> columndata = null;
+    List<String> columndata = null;
 
 // основной метод класса для проверки считывания данных с таблицы
 
@@ -83,6 +70,7 @@ public class ReadingExcelData {
             XSSFWorkbook workbook = new XSSFWorkbook(ios);
             XSSFSheet sheet = workbook.getSheetAt(0);
             Iterator<Row> rowIterator = sheet.iterator();
+
             columndata = new LinkedList<>();
 
             while (rowIterator.hasNext()) {
@@ -166,7 +154,7 @@ public class ReadingExcelData {
     public List<String> getDataStringIntegerDate(String pathToFile, int columnIndex)  {
 
         try {
-            File f = new File(pathToFile);
+            File f = new File(fileName);
             FileInputStream ios = new FileInputStream(f);
             XSSFWorkbook workbook = new XSSFWorkbook(ios);
             XSSFSheet sheet = workbook.getSheetAt(0);
